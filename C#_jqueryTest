@@ -14,7 +14,7 @@
                     }
                     $("#jsonLoad").html(html);
         }
-        
+        참고블로그 : https://moll10.tistory.com/31
         
 =======================================================================================================================================================================        
         
@@ -59,7 +59,10 @@
                     var createDate = new Date(member.CreateDate);
                     var formattedDate = createDate.getFullYear() + "-" + (createDate.getMonth() + 1).toString().padStart(2, "0") + "-" + (createDate.getDate().toString().padStart(2, "0"));
                     $("#jsonLoad").append("<tr><td class='align-center'>" + (i + 1) + "</td><td>" + member.Title + "</td><td class='align-center'>" + member.CreateUser + "</td><td class='align-center'>" + formattedDate + "</td></tr>");
-                });   
+                });
+          참고블로그 : https://huistorage.tistory.com/27
+                      https://goddino.tistory.com/97
+                      https://webtip.tistory.com/entry/jQuery-%ED%85%8D%EC%8A%A4%ED%8A%B8%EB%AC%B8%EC%9E%90%EC%97%B4-%EB%B3%80%EA%B2%BD-%EB%B0%8F-%EA%B2%80%EC%83%89-indexOf-match-%ED%95%A8%EC%88%98-replace-%ED%95%A8%EC%88%98-split-%ED%95%A8%EC%88%98-htmltextval-%EB%A9%94%EC%86%8C%EB%93%9C
               
 ========================================================================================================================================================================
 
