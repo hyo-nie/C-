@@ -1,0 +1,111 @@
+        // 조회 기능 function 구현 (완)
+        function jsonread() {
+                // alert("조회test");
+                let $listobj = jsonData["data"];
+                let $tbodyHtml = $('#tbodyHtml');
+                $listobj.forEach(function (obj) {
+                    $tbodyHtml.append(
+                        "<tr>" + 
+                        "<td>" + obj.customerID + "</td>" + 
+                        "<td>" + obj.name + "</td>" + 
+                        "<td>" + obj.emailAddress + "</td>" +
+                        "<td>" + obj.street + "</td>" +
+                        "<td>" + obj.city + "</td>" +
+                        "<td>" + obj.state + "</td>" +
+                        "<td>" + obj.country + "</td>" +
+                        "<td>" + obj.phoneNumber + "</td>" +
+                        "<td>" + "삭제.."/*<button class="btn sub-btn btn-basic-outline" id="cut" _msttexthash="10381488" _msthash="3">삭제</button> */+ "</td>" +
+                        "</tr>"
+                    );
+                });
+            }  
+         
+         // 항목추가 기능 function 구현 (미완) : 저장이 안됨 X ㅠㅠ
+                  function jsonadd() {
+                // alert("항목추가 test");
+                
+                // tbody 엘리먼트 선택
+                const tbody = document.getElementById("tbodyHtml");
+
+                // 새로운 행 엘리먼트 생성
+                const newRow = document.createElement("tr");
+
+                // 입력 폼을 담을 셀 엘리먼트 생성
+                const formCell = document.createElement("td");
+                formCell.setAttribute("colspan", "9");
+
+                // 입력 폼 생성
+                const form = document.createElement("form");
+            
+                form.innerHTML = 
+                // 참고사항 : common.css 85번째줄 border none 없앴음
+                    `<tr>
+                    <td><input type="text" id="customerID" name="customerID"></td>
+                    <td><input type="text" id="name" name="name"></td>
+                    <td><input type="text" id="emailAddress" name="emailAddress"></td>
+                    <td><input type="text" id="street" name="street"></td>
+                    <td><input type="text" id="city" name="city"></td>
+                    <td><input type="text" id="state" name="state"></td>
+                    <td><input type="text" id="country" name="country"></td>
+                    <td><input type="text" id="phoneNumer" name="phoneNumber"></td>
+                    <td><button type="submit" id="save">저장</button>
+                    <button type="reset" id="cancel">취소</button></td></tr>`;
+
+                // 저장 버튼 클릭 시
+                form.querySelector("#save").addEventListener("submit", function (e) {
+                    e.preventDefault();
+
+                    // 입력된 정보를 가져와 객체로 만듦
+                    const customerID = document.getElementById("customerID").value;
+                    const name = document.getElementById("name").value;
+                    const emailAddress = document.getElementById("emailAddress").value;
+                    const street = document.getElementById("street").value;
+                    const city = document.getElementById("city").value;
+                    const state = document.getElementById("state").value;
+                    const country = document.getElementById("country").value;
+                    const phoneNumber = document.getElementById("phoneNumber").value;
+                    const newItem = {
+                        customerID,
+                        name,
+                        emailAddress,
+                        street,
+                        city,
+                        state,
+                        country,
+                        phoneNumber
+                    };
+
+                    // 기존 데이터를 불러옴
+                    const storedData = localStorage.getItem("data");
+                    const parsedData = JSON.parse(storedData);
+
+                    // 중복된 고객ID가 있는지 확인
+                    const duplicate = parsedData.some((item) => item.customerID === customerID);
+
+                    if (duplicate) {
+                        alert("이미 존재하는 고객ID입니다.");
+                        return;
+                    }
+
+                    // 새로운 항목을 데이터에 추가
+                    parsedData.push(newItem);
+
+                    // 수정된 데이터를 로컬스토리지에 저장
+                    localStorage.setItem("data", JSON.stringify(parsedData));
+
+                    alert("새 항목이 추가되었습니다.");
+
+                    // 폼 제거
+                    form.remove();
+                });
+
+                // 취소 버튼 클릭 시
+                form.querySelector("#cancel").addEventListener("click", function () {
+                    newRow.remove();
+                });
+                formCell.appendChild(form);
+
+                // 입력 폼 추가
+                newRow.appendChild(formCell);
+                tbody.appendChild(newRow);
+            }      
